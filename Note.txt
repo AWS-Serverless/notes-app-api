@@ -1,0 +1,49 @@
+Pool Id : us-west-2_9n1nwbjET
+Pool ARN : arn:aws:cognito-idp:us-west-2:356202615186:userpool/us-west-2_HyZ35bMhR
+vathana-notes-app : 4t8hnla51eae5dqgp86js9i0je
+Identity Pool ID: us-west-2:45967801-8e5d-4462-9314-395ac959f4b2
+
+// Sign Up
+aws cognito-idp sign-up \
+  --region us-west-2 \
+  --client-id 4t8hnla51eae5dqgp86js9i0je \
+  --username admin@example.com \
+  --password Passw0rd! \
+  --user-attributes Name=email,Value=admin@example.com
+
+  // Confirm
+  aws cognito-idp admin-confirm-sign-up \
+  --region us-west-2 \
+  --user-pool-id us-west-2_9n1nwbjET \
+  --username test123@gmail.com
+
+// Generate token
+aws cognito-idp admin-initiate-auth \
+  --region us-west-2 \
+  --user-pool-id us-west-2_9n1nwbjET \
+  --client-id 4t8hnla51eae5dqgp86js9i0je \
+  --auth-flow ADMIN_NO_SRP_AUTH \
+  --auth-parameters USERNAME=admin@example.com,PASSWORD=Passw0rd!
+
+// endpoints:
+  POST - https://82vfbsohl9.execute-api.us-west-2.amazonaws.com/prod/notes
+  GET - https://82vfbsohl9.execute-api.us-west-2.amazonaws.com/prod/notes/{id}
+  GET - https://82vfbsohl9.execute-api.us-west-2.amazonaws.com/prod/notes
+  PUT - https://82vfbsohl9.execute-api.us-west-2.amazonaws.com/prod/notes/{id}
+  DELETE - https://82vfbsohl9.execute-api.us-west-2.amazonaws.com/prod/notes/{id}
+
+  // TokenType
+{
+    "AuthenticationResult": {
+        "ExpiresIn": 3600, 
+        "IdToken": "eyJraWQiOiJtVVpGYlRSXC81eFhaU1d6cDFqUjgzY3RscURXYWU5R3RoTHRLbmtpem9zND0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI5N2NhYTEzMC1mMGU2LTRhMzQtYjIzZC1kYjA0ZTU4YjZlNWIiLCJhdWQiOiI0dDhobmxhNTFlYWU1ZHFncDg2anM5aTBqZSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE0OTgyOTE3NzAsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy13ZXN0LTIuYW1hem9uYXdzLmNvbVwvdXMtd2VzdC0yXzluMW53YmpFVCIsImNvZ25pdG86dXNlcm5hbWUiOiJhZG1pbkBleGFtcGxlLmNvbSIsImV4cCI6MTQ5ODI5NTM3MCwiaWF0IjoxNDk4MjkxNzcwLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIn0.CL58wKPbhoGInB6wsTJGieF363cGi_u-BEIRwDc3Y_1MnUFN6rfUiV4ZA3gK8F6Cx5jcs8GvolBbk9Xb5JgByiK-kfOxxMmubZw_dIyRfWaMGpCS5S2UCzIPYbs8-msdCx8nu0ZVTpnpDmYoJbdXW96LSr1TkGv6Jn6BBYoWktShdZ0S3SSzl0WJ19XL6sE0lqT_XGN7e2DybTwhHC2HBUBZoknKVTQJUsmuTeX4gMJltoQA3Vl1Ripy4k-2GHiF7T6L8l2M5_Hsp7V4ZUN-xjDxexReY6VF1-e452mVBy5OwsakSgIcxpVK_jM-eVOsr04bqqoBD_2kATFGMbFD8A", 
+        "RefreshToken": "eyJjdHkiOiJKV1QiLCJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiUlNBLU9BRVAifQ.aME4Hqd8UKawakyLD-cjF1TW3dnqIbQ8pkGCt4XQujybumSGCehv3VxJJYRPB8GndRhMUAHam4hmUX4Sm2jdJb9Em5JP72SRPaeXaSoOlbOQo3DsAvrvzC0BSy9lsd4fdnEs6yMZGH2aItJnW61ZpWSvdxDhycf12bHak7BJCPOnGZGAM0DutQQIWpE81nUDDpEOk63YSmRgy0w7YXFM9A-LntrBw6Fo7RAx8C1X-jjJwnISBUKzXU_Io1RimPUf2sTxcNKVdmNrD9eQkOxfK12YYTCBt5bMdN7ZseQ9h5XgV3H8PG9LtVmYT8xuzOWq6mxlMuTincS5hYYFSnP8mQ.Oy4-wqg9bbAEoSn_.6eCii2cawtNw_dDa6XGkbZ0P0uAIMC-JyL7dNDqk_8ArDezziqdMYDT6N8onYJQjLDBKyKBtKdFmukMY7nPfT1cb7xHNgo7cjnSgr70vpdMVbhVoGpX6ybpvaViYneaYRkvegpC5b0aU2XjsGM2M540g0pfWDUkgVef-mf7xE-pv7lP9heQV5vF8k9QoSGQH50Z66dSOWHXMqf356gY1Ztf2YNAfuoRjh8cSFvR-bM3lBt1zs7zv_rYLFG_AQyYgDZMA5oaW0AglRpPvfZKO1SdMgz87QkGBCxBeFxIMzB1uS-YTADO_GV-Oq4IsMBcmU53YITwZRDJ0L5TsF5ogBacBvdiJqkFnXejIACnl-FCne2C14D2ZdaZsuyfGaHhM9aoVhZIZQWUZLU3UielxT1q-R1cuH8_PPLkT7iesf4FLgDA37ChFxbuzJVGHgT8nM76BgucoZA4IX07nG5GdleUtwddpkVVlvfC4p2mEP47JiUZk0RPuvVpdzNcq_LewZUqQpu0AWNc6IfMNOgdF84NIUrYrecZvEuLiV2uX3bfJF6Pi-OvSi0tvHdJE-q56_5K43bUHHO5iGbIFnD2y_rFLc88IgGHSGrTKLiskCaeiQ7uTLmLLeocCgxp28oquJMswNknNE72e0ZdbO1jPF6FMuFjEP5nsBTx6NtR3uxDeodImO5XetYJSy6_q65FahHgZ4jYiL_BCwhCYybQwAxMwvmVoqXptHJMI4k4OaLT1AQu8WLINlmy64FHZLCDhj8XYUtenlNvrThYFe-BhgylEwi1zQy_XUiMTfDqTKNiAdZm3UN8O1nNQnutH7MmGKyZlO7IlN-ZH9C8IovGRyfyLFDj9UZuBSmJwfpfdcMn5lM_2hT6GYBSbjqPm8P4Et5aoPnPqr8DDCHNsYQ1zQLGHQX6VMTaXd46ThATI19pbDA9wyOROOOtylM5TpyQM1_hSgl7yy6hyU0A6NUdjtCMQZx8cJE5HtstsPfSTKMNyu3TKDvSjS6EyY5tMoG_pSrpwnvorE-uZ-l9bK2rInINwqtvM1gBRUs-rHfRH7zRdTyM6jh2fky1VA0pyof12fjZMlozY-nu6A1GW69tc-mQS-i8NKB4BFzd5kG61z7IqfOcM9A5OBSycv6PTpaDDyetYy-3oI0WUrx-P_ne8lKo.0cVDOvZlY91BaoNMnobyLQ", 
+        "TokenType": "Bearer", 
+        "AccessToken": "eyJraWQiOiJMQ0M0OVRUWkk5c3RpNks3ZUZNaXlrS2JXTEw1UjB5M3JrMDliTUR5eTZNPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI5N2NhYTEzMC1mMGU2LTRhMzQtYjIzZC1kYjA0ZTU4YjZlNWIiLCJ0b2tlbl91c2UiOiJhY2Nlc3MiLCJzY29wZSI6ImF3cy5jb2duaXRvLnNpZ25pbi51c2VyLmFkbWluIiwiaXNzIjoiaHR0cHM6XC9cL2NvZ25pdG8taWRwLnVzLXdlc3QtMi5hbWF6b25hd3MuY29tXC91cy13ZXN0LTJfOW4xbndiakVUIiwiZXhwIjoxNDk4Mjk1MzcwLCJpYXQiOjE0OTgyOTE3NzAsImp0aSI6ImJmNTM3YzZjLTU3NGEtNGM3ZC05ZGEwLWE0ZTI2ZDk5MjhjYSIsImNsaWVudF9pZCI6IjR0OGhubGE1MWVhZTVkcWdwODZqczlpMGplIiwidXNlcm5hbWUiOiJhZG1pbkBleGFtcGxlLmNvbSJ9.g7hti8XtWqf0Pfkso03Hoq8iu8ie7UMTlBSgQYC1k6pB5CFr7_Gnw5_WqoGtpCKfe9BPAKvS3gyjOYKUg-B30oUW_7nmrtCW1-vrTh7meU7QDOHoMozZgGbFo0Ze6hRQc_ZFBWUv2nxGeU0m_mxWCMURWQhqnDM3y1B7--FgxGCXKnCWlaTRACEGvLUmOFKq8lQrWFlnWhlvqYgqEz_TGLAxtg9_Wfrqs_Jpq-Scmmwvfw2AhjF9HDwdKQ2GzLd7QcqLMHtBYDdLhvl0bMpcm1dvrAekxOboKQy3LF5qWKRCnYMX7JpuzlArxYgolrpItsrPf1ccUZbtQICjshIiGQ"
+    }, 
+    "ChallengeParameters": {}
+}
+
+curl https://82vfbsohl9.execute-api.us-west-2.amazonaws.com/prod/notes \
+  -H "Authorization:eyJraWQiOiJtVVpGYlRSXC81eFhaU1d6cDFqUjgzY3RscURXYWU5R3RoTHRLbmtpem9zND0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI5N2NhYTEzMC1mMGU2LTRhMzQtYjIzZC1kYjA0ZTU4YjZlNWIiLCJhdWQiOiI0dDhobmxhNTFlYWU1ZHFncDg2anM5aTBqZSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE0OTgyOTE3NzAsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy13ZXN0LTIuYW1hem9uYXdzLmNvbVwvdXMtd2VzdC0yXzluMW53YmpFVCIsImNvZ25pdG86dXNlcm5hbWUiOiJhZG1pbkBleGFtcGxlLmNvbSIsImV4cCI6MTQ5ODI5NTM3MCwiaWF0IjoxNDk4MjkxNzcwLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIn0.CL58wKPbhoGInB6wsTJGieF363cGi_u-BEIRwDc3Y_1MnUFN6rfUiV4ZA3gK8F6Cx5jcs8GvolBbk9Xb5JgByiK-kfOxxMmubZw_dIyRfWaMGpCS5S2UCzIPYbs8-msdCx8nu0ZVTpnpDmYoJbdXW96LSr1TkGv6Jn6BBYoWktShdZ0S3SSzl0WJ19XL6sE0lqT_XGN7e2DybTwhHC2HBUBZoknKVTQJUsmuTeX4gMJltoQA3Vl1Ripy4k-2GHiF7T6L8l2M5_Hsp7V4ZUN-xjDxexReY6VF1-e452mVBy5OwsakSgIcxpVK_jM-eVOsr04bqqoBD_2kATFGMbFD8A" \
+  -d "{\"content\":\"hello world 1\",\"attachment\":\"hello.jpg\"}"

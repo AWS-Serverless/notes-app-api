@@ -1,0 +1,10 @@
+{
+  "body": "{\"content\":\"hello world 3\",\"attachment\":\"hello.jpg\"}",
+  "requestContext": {
+    "authorizer": {
+      "claims": {
+        "sub": "USER-SUB-1234"
+      }
+    }
+  }
+}
