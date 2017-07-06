@@ -23,4 +23,5 @@ Resources:
                 Properties:
                   Path: /notes
                   Method: get
+                  Cors: true
                   
