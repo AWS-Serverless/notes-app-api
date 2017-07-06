@@ -23,3 +23,6 @@ Resources:
                 Properties:
                   Path: /notes
                   Method: get
+                  Cors: true
+                  Authorizer:
+                    arn: arn:aws:cognito-idp:us-west-2:356202615186:userpool/us-west-2_9n1nwbjET
