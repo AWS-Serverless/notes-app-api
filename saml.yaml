@@ -8,32 +8,18 @@ Transform: 'AWS::Serverless-2016-10-31'
 #         Description: "*"
 #         Type: "String"
 Resources:
-    # CreateNote:
-    #     Type: AWS::Serverless::Function
-    #     Policies:
-    #         - AWSLambdaExecute # Managed Policy
-    #         - Version: '2012-10-17' # Policy Document
-    #         Statement:
-    #              - Effect: Allow
-    #                Action:
-    #                     - dynamodb:DescribeTable
-    #                     - dynamodb:Query
-    #                     - dynamodb:Scan
-    #                     - dynamodb:GetItem
-    #                     - dynamodb:PutItem
-    #                     - dynamodb:UpdateItem
-    #                     - dynamodb:DeleteItem
-    #                Resource: 'arn:aws:dynamodb:us-west-2:*:*'
-    #     Properties:
-    #         Handler: create.main
-    #         Runtime: nnodejs6.10
-    #         CodeUri: ./
-    #         Events:
-    #           GetResource:
-    #             Type: Api
-    #             Properties:
-    #               Path: /notes
-    #               Method: post
+    CreateNote:
+        Type: AWS::Serverless::Function
+        Properties:
+            Handler: create.main
+            Runtime: nnodejs6.10
+            CodeUri: ./
+            Events:
+              GetResource:
+                Type: Api
+                Properties:
+                  Path: /notes
+                  Method: post
 
     # GetNote:
     #     Type: AWS::Serverless::Function
@@ -48,33 +34,18 @@ Resources:
     #               Path: /notes/{id}
     #               Method: get
 
-    GetNoteList:
-        Type: AWS::Serverless::Function
-        StageName: prod
-        # Policies:
-        #     - AWSLambdaExecute # Managed Policy
-        #     - Version: '2012-10-17' # Policy Document
-        #     Statement:
-        #          - Effect: Allow
-        #            Action:
-        #                 - dynamodb:DescribeTable
-        #                 - dynamodb:Query
-        #                 - dynamodb:Scan
-        #                 - dynamodb:GetItem
-        #                 - dynamodb:PutItem
-        #                 - dynamodb:UpdateItem
-        #                 - dynamodb:DeleteItem
-        #            Resource: 'arn:aws:dynamodb:us-west-2:*:*'
-        Properties:
-            Handler: list.main
-            Runtime: nnodejs6.10
-            CodeUri: ./
-            Events:
-              GetResource:
-                Type: Api
-                Properties:
-                  Path: /notes
-                  Method: get
+    # GetNoteList:
+    #     Type: AWS::Serverless::Function
+    #     Properties:
+    #         Handler: list.main
+    #         Runtime: nnodejs6.10
+    #         CodeUri: ./
+    #         Events:
+    #           GetResource:
+    #             Type: Api
+    #             Properties:
+    #               Path: /notes
+    #               Method: get
 
     # UpdateNote:
     #     Type: AWS::Serverless::Function
