@@ -50,7 +50,7 @@ Resources:
 
     GetNoteList:
         Type: AWS::Serverless::Function
-        StageName: prod
+        # StageName: prod
         Policies:
             - AWSLambdaExecute # Managed Policy
             - Version: '2012-10-17' # Policy Document
