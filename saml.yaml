@@ -50,21 +50,21 @@ Resources:
 
     GetNoteList:
         Type: AWS::Serverless::Function
-        # StageName: prod
-        Policies:
-            - AWSLambdaExecute # Managed Policy
-            - Version: '2012-10-17' # Policy Document
-            Statement:
-                 - Effect: Allow
-                   Action:
-                        - dynamodb:DescribeTable
-                        - dynamodb:Query
-                        - dynamodb:Scan
-                        - dynamodb:GetItem
-                        - dynamodb:PutItem
-                        - dynamodb:UpdateItem
-                        - dynamodb:DeleteItem
-                   Resource: 'arn:aws:dynamodb:us-west-2:*:*'
+        StageName: prod
+        # Policies:
+        #     - AWSLambdaExecute # Managed Policy
+        #     - Version: '2012-10-17' # Policy Document
+        #     Statement:
+        #          - Effect: Allow
+        #            Action:
+        #                 - dynamodb:DescribeTable
+        #                 - dynamodb:Query
+        #                 - dynamodb:Scan
+        #                 - dynamodb:GetItem
+        #                 - dynamodb:PutItem
+        #                 - dynamodb:UpdateItem
+        #                 - dynamodb:DeleteItem
+        #            Resource: 'arn:aws:dynamodb:us-west-2:*:*'
         Properties:
             Handler: list.main
             Runtime: nnodejs6.10
